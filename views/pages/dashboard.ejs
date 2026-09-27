@@ -1,0 +1,11 @@
+<%- include('../partials/header', { title: 'Dashboard' }) %>
+<h2>Tableau de bord</h2>
+<div class="cards">
+  <div class="card"><strong><%= stats.facilities %></strong><span>Salles</span></div>
+  <div class="card"><strong><%= stats.activities %></strong><span>Activités</span></div>
+  <div class="card"><strong><%= stats.members %></strong><span>Adhérents</span></div>
+  <div class="card"><strong><%= stats.registrations %></strong><span>Inscriptions</span></div>
+  <div class="card"><strong><%= Number(stats.revenue).toFixed(2) %> €</strong><span>Recettes</span></div>
+</div>
+<p>Utilisez le menu pour gérer les infrastructures, activités, adhérents et inscriptions.</p>
+<%- include('../partials/footer') %>

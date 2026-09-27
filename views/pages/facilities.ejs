@@ -1,0 +1,18 @@
+<%- include('../partials/header', { title: 'Salles' }) %>
+<h2>Infrastructures</h2>
+<% if (error) { %><div class="alert"><%= error %></div><% } %>
+<form method="POST" action="/facilities" class="form-grid">
+  <input name="name" placeholder="Nom" required>
+  <input name="type" placeholder="Type (Gymnase, Dojo...)" required>
+  <input name="erp_capacity" type="number" min="1" placeholder="Jauge ERP" required>
+  <button type="submit">Ajouter</button>
+</form>
+<table>
+  <thead><tr><th>ID</th><th>Nom</th><th>Type</th><th>Jauge ERP</th></tr></thead>
+  <tbody>
+  <% facilities.forEach(f => { %>
+    <tr><td><%= f.id %></td><td><%= f.name %></td><td><%= f.type %></td><td><%= f.erp_capacity %></td></tr>
+  <% }) %>
+  </tbody>
+</table>
+<%- include('../partials/footer') %>

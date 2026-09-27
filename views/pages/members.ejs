@@ -1,0 +1,23 @@
+<%- include('../partials/header', { title: 'Adhérents' }) %>
+<h2>Adhérents</h2>
+<form method="POST" action="/members" class="form-grid">
+  <input name="full_name" placeholder="Nom complet" required>
+  <input name="birth_date" type="date" required>
+  <select name="family_id"><option value="">Sans famille</option><% families.forEach(f => { %><option value="<%= f.id %>"><%= f.family_name %> — QF <%= f.family_quotient %></option><% }) %></select>
+  <input name="medical_certificate_date" type="date">
+  <label class="checkbox"><input type="checkbox" name="resident" checked> Résident communal</label>
+  <button type="submit">Ajouter</button>
+</form>
+<table>
+<thead><tr><th>Nom</th><th>Naissance</th><th>Résident</th><th>Famille</th><th>Catégorie</th><th>Certificat</th></tr></thead>
+<tbody>
+<% members.forEach(m => { %>
+<tr>
+<td><%= m.full_name %></td><td><%= new Date(m.birth_date).toLocaleDateString('fr-FR') %></td>
+<td><%= m.resident ? 'Oui' : 'Non' %></td><td><%= m.family_name || '-' %></td><td><%= m.age_category %></td>
+<td><%= m.medical_certificate_date ? new Date(m.medical_certificate_date).toLocaleDateString('fr-FR') : 'Absent' %></td>
+</tr>
+<% }) %>
+</tbody>
+</table>
+<%- include('../partials/footer') %>

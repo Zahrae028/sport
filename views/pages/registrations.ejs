@@ -1,0 +1,43 @@
+<%- include('../partials/header', { title: 'Inscriptions' }) %>
+<h2>Nouvelle inscription</h2>
+<% if (error) { %><div class="alert"><%= error %></div><% } %>
+<% if (quote) { %>
+<div class="success">
+  <strong>Inscription confirmée — <%= Number(quote.finalPrice).toFixed(2) %> €</strong>
+  <ul><% quote.details.forEach(d => { %><li><%= d %></li><% }) %></ul>
+  <p>Statut médical : <%= quote.medicalStatus %></p>
+  <% if (quote.installments) { %><p>3 échéances : <%= quote.installments.map(x => x.toFixed(2) + ' €').join(' / ') %></p><% } %>
+</div>
+<% } %>
+<form method="POST" action="/registrations" class="form-grid">
+  <select name="member_id" required><option value="">Adhérent</option><% members.forEach(m => { %><option value="<%= m.id %>"><%= m.full_name %></option><% }) %></select>
+  <select name="activity_id" required><option value="">Activité</option><% activities.forEach(a => { %><option value="<%= a.id %>"><%= a.name %></option><% }) %></select>
+  <select name="payment_mode"><option value="1">Paiement 1 fois</option><option value="3">Paiement 3 fois</option></select>
+  <label class="checkbox"><input type="checkbox" name="pass_sport"> Pass'Sport valide</label>
+  <button type="submit">Inscrire</button>
+</form>
+
+<h2>Inscriptions confirmées</h2>
+<table>
+<thead><tr><th>Adhérent</th><th>Activité</th><th>Prix</th><th>Médical</th><th>Statut</th><th>Action</th></tr></thead>
+<tbody>
+<% registrations.forEach(r => { %>
+<tr>
+<td><%= r.full_name %></td><td><%= r.activity_name %></td><td><%= Number(r.final_price).toFixed(2) %> €</td>
+<td><%= r.medical_status %></td><td><%= r.status %></td>
+<td><% if (r.status === 'confirmed') { %><form method="POST" action="/registrations/<%= r.id %>/cancel"><button class="danger" type="submit">Annuler</button></form><% } %></td>
+</tr>
+<% }) %>
+</tbody>
+</table>
+
+<h2>File d'attente</h2>
+<table>
+<thead><tr><th>Adhérent</th><th>Activité</th><th>Priorité</th><th>Statut</th><th>Deadline</th></tr></thead>
+<tbody>
+<% waiting.forEach(w => { %>
+<tr><td><%= w.full_name %></td><td><%= w.activity_name %></td><td><%= w.priority_score %></td><td><%= w.status %></td><td><%= w.deadline_confirmation || '-' %></td></tr>
+<% }) %>
+</tbody>
+</table>
+<%- include('../partials/footer') %>

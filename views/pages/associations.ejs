@@ -1,0 +1,17 @@
+<%- include('../partials/header', { title: 'Clubs partenaires' }) %>
+<h2>Associations / Clubs partenaires</h2>
+<% if (error) { %><div class="alert"><%= error %></div><% } %>
+<form method="POST" action="/associations" class="form-grid">
+  <input name="name" placeholder="Nom du club" required>
+  <input name="contact_email" type="email" placeholder="Email de contact">
+  <button type="submit">Ajouter</button>
+</form>
+<table>
+  <thead><tr><th>ID</th><th>Nom</th><th>Email</th></tr></thead>
+  <tbody>
+  <% associations.forEach(a => { %>
+    <tr><td><%= a.id %></td><td><%= a.name %></td><td><%= a.contact_email || '-' %></td></tr>
+  <% }) %>
+  </tbody>
+</table>
+<%- include('../partials/footer') %>

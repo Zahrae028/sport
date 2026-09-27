@@ -1,0 +1,4 @@
+@media print {
+  nav, button, form { display: none !important; }
+  body { background: white; }
+}

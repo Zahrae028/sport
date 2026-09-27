@@ -1,0 +1,18 @@
+{
+  "name": "sportconnect-pro",
+  "version": "1.0.0",
+  "description": "Projet YouCode MERN - serveur HTTP natif, EJS et PostgreSQL",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^2.3.0",
+    "dotenv": "^16.6.1",
+    "ejs": "^3.1.10",
+    "finalhandler": "^1.3.2",
+    "find-my-way": "^8.2.2",
+    "pg": "^8.23.0",
+    "serve-static": "^1.16.3"
+  }
+}
